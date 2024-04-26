@@ -1,0 +1,496 @@
+Waterfall Methodology Daiagram: Requirement gathering==>Design(Architecture)==>Devolopment==>Integration and Testing ==> Deployement(dev/qa/uat==>Prod)==>Maintenance
+            ===>it is mainly used at the old Projects:
+
+Agile Methodology: Sprint planning ==> for every 2 weeks monitoring the above stages and DSU(Daily standup meeting).
+ ===> Mostly this method is used.
+
+DEVOPS: It is a collaboration between development and oeration teams which enables continuous of application and services to our end users.
+  
+
+==> Ticketing tool(PLan)===> JIRA & ITSM(Sympony tool)
+
+==> Mostly uses the version control system(VCS)(Code Managing tool) as GIT.
+   Git,SVN and TFS
+
+===> Build tool ==> Maven (Java Build applications)==> Automate the creation of executablecode from sourcecode ==> Maven, Gradle and ANT mostly we used the java based applicaton use MAVEN.
+
+===> Artifactory tool: after build process then it wil generate the .jar, .war,.ear files and placed into the pom.xml(targert folder) ==> Stores the artifacs or Binaries. eg: Nexus , Jfrog Artifactory
+
+===> Code Quality tools: to check the quality of the code(To detects the bugs ang vulnerabilities with showing the bugs as grade system)
+    Sonarqube(mostly its generate the proper code),PMD  
+
+===>Application severs: server is used to design to intall, operate and host the applications.
+   tomcat(mostly used for deploy the War(web application) files in java based applications), weblogic, Glassfish, and JBoss enterprise application platform.
+ 
+===>Testing tool ===> Selenium(Majority) and Junit 
+
+====> CI tools ===> It is the bridge between development and operations team by automates the building, testing and development of application 
+   Jenkins, bambo ,Teamcity
+===> Configuration management tool:  ANSIBLE, CHEF and PUPPET; If install the software in 100 servers at a with automately by using this Configuration management tool. 
+
+===> Monitoring tools ===> Splunk, Nagios, Grafana, Prometheus and cloudWatch
+
+====> Operating tool==> ANSIBLE, CHEF and PUPPET;  ANSIBLE(Majority used) ===> Agentless(No need to install the ANSIBLE software in Destination server only install in the SOURCE Server) 
+
+=====> Deployement tool ==> Docker(containerization tool) & Kubernetes(Container orchaistration tool)
+
+============================================================================================================================================
+
+Linux commands:
+
+man cd 
+ 
+Check the CPU and memory info : cat /proc/cpuinfo
+
+top
+
+free -h
+ 
+ping ==> to know the access 
+
+curl: to checks the healthchecks of particular url
+
+wget : to download the tar or zip file from the internet we will use wget command.
+
+grep : search ex: history |grep wget
+
+tree: to know the folder/directory structure : to install tree command==> yum install tree -y
+
+ex: tree .
+
+
+last: to know the information about the user entry/exit detais with timings.
+
+shutdown: to stop the server inside cli
+reboot : to reboot the server inside cli
+
+cd /  ===> to know the default directories:
+
+Default directories are:
+
+bin ==> usr/bin : to know the user binaries
+dev: device files stored in dev directory
+
+*etc: configuration files stored in the etc directory
+
+*home: to store the multiple users with permissions in this directory
+
+lib/lib64: ==>usr/lib ==> it can store the 64bit libraries are storaed in his file 
+
+mnt: temporerly mount the filesystem in this directory
+
+*opt : ==> by default linux provided the default directory for to locate the application in this folder. ==> optional add on application
+
+proc : process information ==> provides detailed information about the current state of the system, including information about processes, hardware, and kernel configuration. Here are some of the main functions of the /proc directory:
+
+sbin: system bineries
+
+srv: service data
+sys: system configuration
+tmp: temporerly directory
+*usr: user details
+*var: to stores the variable files in this directory
+
+to switch to any default directory use only /
+
+ex: cd /opt
+
+=================================================================================================================================
+
+working with files: 
+
+touch: to create empty file
+
+cat: to read and insert the data into file
+
+cat >f1: to write anythinf in this folder and for save it ctrl+d then press enter
+
+cat >>f1: to add the data for existing
+
+vi or vim (comfirtable) or nano : to insert the data into the file  ==> to write any data press the I(insert)
+                                              ==> for save the data press the escape and press the :wq!
+					      ==> 2 times dd ==> to delete the line
+					      ==> dl ==> delete letter
+					     ====> dw ==> delete word ====> we are out of insert mode only.
+					     ==>set nu==> to set the numbers for lines 
+
+cp -p ==> copied the file with same permissions form source to destination path
+cp -r ==> recursively to copy the directory from source to destination path
+mv : to rename the file and move the old file into other location. 
+
+=========================================================================================================================================
+
+soft link, hard link and inode numbers:
+
+create softlink for file: ln -s f1 test1
+we can crete soft link for both files and directories.
+
+To reduce the size for file f1 is more and test1 as low size
+
+Hardlink: it work as mirror for file and directory ==> ln f2 test2
+==>same size for both files even delete the old file but not delete the new file
+==>its not used for directory
+==>by using with inode number we can identifies the hardlink files i.e; ls -li ==> to check the inode numbers.
+
+File Permission: chmod 
+user: rwx
+group: rwx
+others: rwx
+r=read=4
+w=write=2
+x=execute=1
+
+ex: chmod 755 f1 ==>rwxr_xr_x
+
+chmod -R 777 d1 ==> change the permissions for directories and sub directories or subfiles.
+================================================================================================================================
+To changes the file ownership or directories ownership:
+
+ownership permissions: chown
+
+id user1
+
+chown user1:user1 f1 ===>now we have changed the file user permissions to user1 and group permissions to user1
+
+chown -R user1:user1 d1
+==================================================================================================================
+Creating User:
+
+ueradd suresh or adduser suresh ==> create suresh user
+
+To create the password for the user : passwd <username>
+
+id suresh ==> uid,gid,groups=1002(suresh)
+
+users are stored in ==> cat /etc/passwd
+
+cat /etc/group ==>to shows user with group and with ids 
+
+users list also showed in /home default directory
+
+
+delete the user : userdel -r suresh
+
+Creating Group: 
+
+groupadd group1 : create group1 group
+
+to check the group : cat /etc/group 
+
+delete the group: groupdel group1
+
+User add to group:
+
+usermod -a -G group2 sunil : User add to group
+
+==============================================================
+
+head ==> default to know the top 10 lines data
+
+head f1
+
+head -n 5 f1 ==> to show top 5
+
+tail ==> default to know the bottom 10 lines data
+
+
+
+top and free command:
+
+top: t o know the  cpu and memory utilization
+
+in real to application cpu and memory details  ==>from observation once restart the application
+
+free : to know the how much memory is available
+
+free -h : human readable format: inmbs and kbs
+========================================================================================================================= 
+
+YUM command: yum: yellodog updater modified
+
+to install the packages by using with yum only:
+
+yum install git -y ==> to install the git
+
+git version:
+
+remove the git: yum remove git -y:
+
+yum check-update : check the updtes of packages
+
+yum update packagename
+
+To know the list of packages : yum list
+ 
+Information about the package: yum info git
+
+yum history : to show the list of run commands
+
+====================================================================
+
+RPM ==> redhat package manager
+
+.rpm ==> extension 
+
+============================================================
+
+tar command: used for archiving files and directories into a single file
+
+tar -cvf mm.tar venky siva suresh f1 f2 ==> combined the all files into the mm.tar file
+
+tar -xvf mm.tar ==> extarct the mm.tar file 
+
+tar -tvf mm.tar ==> without extract the file
+
+============================================================================================
+zip command: compress the file or extract the file
+
+zip ms.zip f1 f2 f3 test1 test2 msg1
+  
+
+unzip ms.zip ==> extarct the ms.zip file
+
+unzip -l ms.zip:  without extract the file
+========================================================================================
+
+find: to find the file 
+
+find / -name siva
+
+==================================================================================================
+
+df : disk file system: 
+
+To know the disk filesystem sizes:
+
+df -h ==> human readable
+
+du ==> disk usage 
+
+du /opt -h
+
+ps : process status 
+
+ps -a |grep 8080
+
+ps -a |grep tomcat
+
+To stop the process: kill process id 
+kill -9 4563387
+
+==========================================================================================================
+
+sleep: use cases 
+sleep 5 ==> to wait for the 5 seconds between the tasks or scripts
+
+*host:  to know the ip from dns or dns from ip 
+
+diff m1 m2 ==> to knwo difference two m1 and m2 files
+
+diff --side-by-side m1 m2
+
+
+==============================================================================
+ssh:
+ssh -i key.pem uuntu@x.x.x.x   ==> to connect the server
+
+scp: secure copy protocal:  copy form local to remote server and viceversa
+
+scp -i key.pem ubuntu@x.x.x.x:/home/ubutu/suresh   D:\D Drive\All folders\Suresh\PERSONAL\Suresh
+
+from cureent server$: scp -pr filename root@otehr server ip:/root
+
+====================================================================================================================
+
+crontab: to run the script within a specific time
+
+Syntax: Min Hour Dayofmonth(DOM) MON DOW CMD(command)
+
+Min : 0 to 59
+
+Hours: 0 to 23 
+
+DOM : 1-31
+
+MON : 1-12
+
+DOW : 0-6
+
+CMD : command ==>  any command to be executed 
+
+crontab -e ==>to create new crontab as: 15 * * * *  /opt/script.sh ==> apply this command as => crontab -l
+
+crontab -r ==> to delete the crontab
+
+to know the status of crontab : systemctl crond.service
+
+=========================================================================
+
+sed : sed -i s/vinod/murali/g file ==> to change the murali as vinod in file 
+
+
+vim file: ===> :%s/sunil/bhanu/g ==> :wq!
+
+============================================================================================
+
+telnet command: to check the communication/connectivity betwen two servers
+
+yum install telnet -y
+
+telnet Aseverip 22 ===> connected B server to A server
+
+netstat : to check the listener port numbers 
+
+netstat -a ==> all 
+
+netstat: -at ==> only display tcp(transmission control protocal) protocal
+
+netstat -au ==> udp(user data protocal) protocal 
+
+netstat -l ==> listening port 
+
+netstat -lt ==> listen tcp protocal
+
+netstat -lu ==> only udp protocals
+
+netstat -lx ==> unix ports
+
+netstat -s ==> statistic information
+
+netstat -st ==> statistic tcp
+
+netstat -r ==> define the routing
+
+netstat -an |grep 8080 ==> specific port number
+=====================================================================================================
+
+ifconfig: interface configuration ==> to know the ip or network configuration
+
+nslookup: to check the the rsolve or not our DNS 
+
+new /data creation on New Servers:
+-------------------
+
+lsblk
+vgcreate datavg /dev/sdb
+vgs
+lvcreate -l +100%FREE -n  datalv datavg
+lvs
+mkfs.xfs /dev/datavg/datalv
+mkdir /data
+chown appadmin:appadmin /data
+vi /etc/fstab
+/dev/mapper/datavg-datalv       /data           xfs     defaults        0 0
+mount -a
+vgs
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
